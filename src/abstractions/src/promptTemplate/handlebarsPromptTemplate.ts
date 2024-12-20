@@ -1,6 +1,6 @@
+import { KernelArguments } from '../functions';
 import { PromptTemplate } from '@semantic-kernel/abstractions/src/promptTemplate/promptTemplate';
 import Handlebars from 'handlebars';
-import { KernelArguments } from '../functions';
 
 export const handlebarsPromptTemplate = (template: string): PromptTemplate => {
   return {

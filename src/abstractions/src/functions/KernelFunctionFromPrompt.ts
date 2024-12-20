@@ -2,11 +2,7 @@ import { ChatCompletionService, PromptExecutionSettings } from '../AI';
 import { Kernel } from '../Kernel';
 import { ChatMessageContent } from '../contents';
 import { type FromSchema } from '../jsonSchema';
-import {
-  PromptTemplate,
-  PromptTemplateConfig,
-  PromptTemplateFormat,
-} from '../promptTemplate';
+import { PromptTemplate, PromptTemplateConfig, PromptTemplateFormat } from '../promptTemplate';
 import { KernelPromptTemplate } from '../promptTemplate/KernelPromptTemplate';
 import { AIService } from '../services';
 import { KernelArguments } from './KernelArguments';
