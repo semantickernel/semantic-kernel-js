@@ -3,11 +3,11 @@ import { Kernel } from '../Kernel';
 import { ChatMessageContent } from '../contents';
 import { type FromSchema } from '../jsonSchema';
 import {
-  PassThroughPromptTemplate,
   PromptTemplate,
   PromptTemplateConfig,
   PromptTemplateFormat,
 } from '../promptTemplate';
+import { KernelPromptTemplate } from '../promptTemplate/KernelPromptTemplate';
 import { AIService } from '../services';
 import { KernelArguments } from './KernelArguments';
 import { KernelFunction } from './KernelFunction';
@@ -130,17 +130,18 @@ export class KernelFunctionFromPrompt extends KernelFunction<
     throw new Error(`Unsupported AI service type: ${AIService.serviceType}`);
   }
 
-  private getPromptTemplate = (): PromptTemplate => {
+  private getPromptTemplate = (args: object): PromptTemplate => {
     switch (this.promptTemplateConfig.templateFormat) {
       case 'passthrough':
-        return new PassThroughPromptTemplate(this.promptTemplateConfig.template);
+        // return new PassThroughPromptTemplate(this.promptTemplateConfig.template);
+        return new KernelPromptTemplate(this.promptTemplateConfig.template, args);
       default:
         throw new Error(`${this.promptTemplateConfig.templateFormat} template rendering not implemented`);
     }
   };
 
   private async renderPrompt(kernel: Kernel, args: KernelArguments<PromptType>): Promise<PromptRenderingResult> {
-    const promptTemplate = this.getPromptTemplate();
+    const promptTemplate = this.getPromptTemplate(args);
 
     const { service, executionSettings } =
       kernel.services.trySelectAIService({
