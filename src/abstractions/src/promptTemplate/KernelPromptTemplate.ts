@@ -8,6 +8,6 @@ export class KernelPromptTemplate implements PromptTemplate {
   ) {}
 
   render() {
-    return handlebarsPromptTemplate(this.template).render({}, this.args);
+    return handlebarsPromptTemplate(this.template).render(undefined, this.args);
   }
 }
